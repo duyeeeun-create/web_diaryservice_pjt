@@ -38,4 +38,6 @@ set @@auto_increment_increment = 3;
 
 drop table tbl_member;
 
-select count(*) from tbl_member where memId = 'gildong';
+select count(*) cnt from tbl_member where memId = 'gildong';
+
+delete from tbl_member;

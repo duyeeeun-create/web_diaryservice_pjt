@@ -9,7 +9,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 
-@WebServlet({ "/MemberController", "*.mem" })
+@WebServlet("*.mem" )
 public class MemberController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        

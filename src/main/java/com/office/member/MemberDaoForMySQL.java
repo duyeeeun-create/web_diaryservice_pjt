@@ -67,7 +67,7 @@ public class MemberDaoForMySQL implements IMemberDao {
 			
 		}	finally {
 			
-			//8. 외부자원 해제
+			//8                          . 외부자원 해제
 			try {
 				
 				if(rs != null) rs.close();
