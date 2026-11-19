@@ -23,13 +23,13 @@ public class MemberServiceForDW implements IMemberService{
 	
 	boolean isMember =	iMemberDao.isMember(memId);
 	//System.out.println("isMember:" + isMember); //isMember:false
-	
+	int result = 0;
 	
 	if(!isMember) {
-		int result = iMemberDao.insertNerMember(memberDto);
+		 result = iMemberDao.insertNerMember(memberDto);
 		
 	}
-		return 0;
+		return result;
 	}
 
 	@Override

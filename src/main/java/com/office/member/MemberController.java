@@ -42,10 +42,10 @@ public class MemberController extends HttpServlet {
 	    
 		if(resultForSignup > 0) {
 			
-			nextPage = "view/ member/ "
+			nextPage = "view/ member/signup_ok.jsp";
 			
 		}else {
-			
+			nextPage = "view/ member/signup_ng.jsp";
 		
 		}
 		break;

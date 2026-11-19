@@ -1,3 +1,4 @@
+
 package com.office.member;
 
 import java.sql.Connection;
@@ -8,7 +9,6 @@ import java.sql.ResultSet;
 public class MemberDaoForMySQL implements IMemberDao {
 	
 	final private String DRIVER = "com.mysql.cj.jdbc.Driver";
-	
 	final private String URL = "jdbc:mysql://127.0.0.1:3306/db_diary";
 	final private String USERNAME = "root";
 	final private String PASSWORD = "1234";
@@ -41,6 +41,7 @@ public class MemberDaoForMySQL implements IMemberDao {
 						
 			//5. 데이터 주입
 			pstmt.setString(1, memId);
+		
 			
 			//6. 작업지시
 			 rs =	pstmt.executeQuery();
@@ -51,14 +52,14 @@ public class MemberDaoForMySQL implements IMemberDao {
 			 * executeUpdate() : insert(새로생긴행의수),update(업데이트된 행의수), delete(삭제된 행의수) ,  반환형(int) -> 영향을 받은 행의 수
 			 * 
 			 * */
-			
-			
-			//7. 가져온 데이터 분석하기
-			while (rs.next()) {
-//				type type = (type) rs.next();
+			 //7. 가져온 데이터 분석
+			 
+			 while (rs.next()) {
 				result = rs.getInt("cnt");
 				
 			}
+			
+			
 			
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -80,13 +81,67 @@ public class MemberDaoForMySQL implements IMemberDao {
 			
 			
 		}
-		return result == 0 ? false : true;
+		return result == 0? false : true;
 	}
+
+	
 
 	@Override
 	public int insertNerMember(MemberDto memberDto) {
-		// TODO Auto-generated method stub
-		return 0;
+		
+		int result = 0;
+		
+		Connection conn = null;
+		PreparedStatement pstmt = null;		
+		
+		try {
+			
+			//1. 드라이버로드 in 메모리
+			Class.forName(DRIVER); //DRIVER 로드
+			
+			//2. 다리 건설 : Connection 생성 by 인증(Authentication)
+			 conn = DriverManager.getConnection(URL, USERNAME, PASSWORD);
+			
+			//3. SQL 작성(작업지시서)
+			String sql = "insert into tbl_member(memId, memPw, memMail, memPhone) values(?, ?, ?, ?)";			
+			
+			//4. 일꾼 선택 (생성)
+			pstmt = conn.prepareStatement(sql);
+						
+			//5. 데이터 주입
+			pstmt.setString(1, memberDto.getMemId());
+			pstmt.setString(2, memberDto.getMemPw());
+			pstmt.setString(3, memberDto.getMemMail());
+			pstmt.setString(4, memberDto.getMemPhone());
+			
+			//6. 작업지시
+			 result =	pstmt.executeUpdate();
+			//ResultSet이 작업된 결과를 가져옴 rs.next() bool타입 하나씩 읽고 false면 끝
+			
+		
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			
+			
+		}	finally {
+			
+			//8. 외부자원 해제
+			try {
+				
+				
+				if(pstmt != null) pstmt.close();
+				if(conn != null) conn.close();
+				//역순으로 자원 해제
+				
+			} catch (Exception e2) {
+				e2.printStackTrace();
+			}
+			
+			
+		}
+		return result;
+		
 	}
 
 	@Override
@@ -95,6 +150,6 @@ public class MemberDaoForMySQL implements IMemberDao {
 		return null;
 	}
 
-	
+
 	
 }
