@@ -68,7 +68,7 @@ public class MemberController extends HttpServlet {
 		if(signinedMemberDto != null) {
 			
 			HttpSession session= request.getSession();
-			session.setAttribute("signinedsMemberId", signinedMemberDto.getMemId());
+			session.setAttribute("signinedMemberId", signinedMemberDto.getMemId());
 			session.setMaxInactiveInterval(60*30);
 			
 			nextPage = generateView("signin_ok");
@@ -80,10 +80,10 @@ public class MemberController extends HttpServlet {
 		break;
 		
 		
-	case "/signout_form.mem":
+	case "/signout_confirm.mem":
 		
 		HttpSession session = request.getSession();
-		session.removeAttribute("signinedsMemberId");
+		session.removeAttribute("signinedMemberId");
 		
 		nextPage = "/";
 		
