@@ -15,24 +15,23 @@ public class MemberServiceForDW implements IMemberService{
 
 	@Override
 	public int signup(HttpServletRequest request, HttpServletResponse response) {
+			
+		String memId =	request.getParameter("memId");
+		String memPw =	request.getParameter("memPw");
+		String memMail =	request.getParameter("memMail");
+		String memPhone =	request.getParameter("memPhone");
+			
+		MemberDto memberDto = new MemberDto(memId, memPw, memMail, memPhone);
 		
-	String memId =	request.getParameter("memId");
-	String memPw =	request.getParameter("memPw");
-	String memMail =	request.getParameter("memMail");
-	String memPhone =	request.getParameter("memPhone");
+		boolean isMember =	memberDao.isMember(memId);
+		int result = 0;
 		
-	MemberDto memberDto = new MemberDto(memId, memPw, memMail, memPhone);
-	
-	boolean isMember =	memberDao.isMember(memId);
-	//System.out.println("isMember:" + isMember); //isMember:false
-	int result = 0;
-	
-	if(!isMember) {
-		 result = memberDao.insertNerMember(memberDto);
-		
-	}
-		return result;
-	}
+		if(!isMember) {
+			 result = memberDao.insertNerMember(memberDto);
+			
+		}
+			return result;
+		}
 
 	@Override
 	public MemberDto signin(HttpServletRequest request, HttpServletResponse response) {
@@ -42,6 +41,8 @@ public class MemberServiceForDW implements IMemberService{
 		
 		MemberDto selectedMemberDto	= memberDao.selectmemberByMemId(memId);
 		
+		System.out.println("selectedMemberDto: " + selectedMemberDto);
+		
 		if(selectedMemberDto != null) {
 			
 			System.out.println("[MemberService] selectedMemberDto is not null");
@@ -49,7 +50,9 @@ public class MemberServiceForDW implements IMemberService{
 			if(selectedMemberDto.getMemPw().equals(memPw)) {
 				System.out.println("[MemberService] signin SUCCESS");
 				
+				
 				return selectedMemberDto;
+				
 			}else {
 				System.out.println("[MemberService] signin FAIL");
 				
@@ -57,6 +60,7 @@ public class MemberServiceForDW implements IMemberService{
 			}
 		}else {
 			System.out.println("[MemberService] selectedMemberDto is null");
+			System.out.println("[MemberService] signin FAIL");
 			
 			return null;
 		}

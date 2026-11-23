@@ -6,18 +6,19 @@
 <link href = "./res/css/include/nav.css" rel = "stylesheet" type = "text/css">
 <nav>
 		<div class = "nav_wrap">
-			<a href = "<%=request.getContextPath()%>/">HOME</a>
+			<a href = "${pageContext.request.contextPath}/">HOME</a>
 			<c:choose>
 				<c:when test="${empty sessionScope.signinedsMemberId}">
-				<a href = "<%=request.getContextPath()%>/signup_form.mem">SIGN-UP</a>
-				<a href = "<%=request.getContextPath()%>/signin_form.mem">SIGN-IN</a>
+				<a href = "${pageContext.request.contextPath}/signup_form.mem">SIGN-UP</a>
+				<a href = "${pageContext.request.contextPath}/signin_form.mem">SIGN-IN</a>
 				</c:when>
 				
 				<c:otherwise>
-					<a href = "<%=request.getContextPath()%>/signout_form.mem">SIGN-OUT</a>
-					<a href = "<%=request.getContextPath()%>/diary_write_form.dir">DIARY_WRITE</a>
-					<a href = "<%=request.getContextPath()%>/diary_list.dir">DIARY_LIST</a>
+					<a href = "${pageContext.request.contextPath}/signout_confirm.mem">SIGN-OUT</a>
+					<a href = "${pageContext.request.contextPath}/diary_write_form.dir">DIARY_WRITE</a>
+					<a href = "${pageContext.request.contextPath}/diary_list.dir">DIARY_LIST</a>
 				</c:otherwise>
+				
 			</c:choose>
 			
 			

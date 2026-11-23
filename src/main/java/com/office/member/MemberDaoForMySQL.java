@@ -155,8 +155,6 @@ public class MemberDaoForMySQL implements IMemberDao {
 	@Override
 	public MemberDto selectmemberByMemId(String id) {
 		
-		
-		
 		Connection conn = null;
 		PreparedStatement pstmt = null;	
 		ResultSet rs = null;
@@ -182,7 +180,7 @@ public class MemberDaoForMySQL implements IMemberDao {
 			pstmt = conn.prepareStatement(sql);
 						
 			//5. 데이터 주입
-			pstmt.setString(1,id);
+			pstmt.setString(1, id);
 		
 			//6. 작업지시
 			 rs = pstmt.executeQuery();
@@ -201,11 +199,8 @@ public class MemberDaoForMySQL implements IMemberDao {
 				
 			}
 			
-		
-			
 		} catch (Exception e) {
 			e.printStackTrace();
-			
 			
 		}	finally {
 			
@@ -219,14 +214,13 @@ public class MemberDaoForMySQL implements IMemberDao {
 				
 			} catch (Exception e2) {
 				e2.printStackTrace();
+				
 			}
-			
 			
 		}
 	
 		return memberDtos.size() > 0 ? memberDtos.get(0) : null;
+		
 	}
-
-
 	
 }

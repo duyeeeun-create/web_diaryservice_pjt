@@ -17,13 +17,14 @@ public class DiaryService {
 		public int writeNewDiary(HttpServletRequest request, HttpServletResponse response) {
 			
 			String diaryWord = request.getParameter("diaryWord");
+				
+			HttpSession session = request.getSession();
+			String signinedMemberId = String.valueOf(session.getAttribute("signinedMemberId"));
 			
-		HttpSession session = request.getSession();
-		String signinedMemberId = String.valueOf(session.getAttribute("signinedsMemberId"));
-		
-		DiaryDto diaryDto = new DiaryDto(diaryWord, signinedMemberId);
-		
-	  int result =	diaryDao.insertNewDiary(diaryDto);
-			return 0;
+			DiaryDto diaryDto = new DiaryDto(diaryWord, signinedMemberId);
+			
+			int result = diaryDao.insertNewDiary(diaryDto);
+			
+			return result;
 		}
 }

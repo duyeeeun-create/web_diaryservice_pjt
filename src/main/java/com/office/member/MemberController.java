@@ -67,14 +67,17 @@ public class MemberController extends HttpServlet {
 		
 		if(signinedMemberDto != null) {
 			
-			HttpSession session= request.getSession();
+			HttpSession session = request.getSession();
 			session.setAttribute("signinedMemberId", signinedMemberDto.getMemId());
-			session.setMaxInactiveInterval(60*30);
+			session.setMaxInactiveInterval(60 * 30);
+
 			
 			nextPage = generateView("signin_ok");
+					
 			
 		}else {
 			nextPage = generateView("signin_ng");
+			
 		}
 		
 		break;

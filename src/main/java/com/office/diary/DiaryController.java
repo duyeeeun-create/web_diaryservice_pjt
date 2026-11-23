@@ -36,13 +36,14 @@ public class DiaryController extends HttpServlet {
 			
 		case "/write_confirm.dir":
 			
-			diaryService =new DiaryService(new DiaryDao());
+			diaryService = new DiaryService(new DiaryDao());
 			int resultForWrite = diaryService.writeNewDiary(request,response);
 			
 			
 			break;
 			
 		}
+		
 		RequestDispatcher dispatcher = request.getRequestDispatcher(nextPage);
 		 dispatcher.forward(request, response);
 	}
