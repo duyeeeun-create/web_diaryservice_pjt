@@ -16,6 +16,10 @@ create table tbl_member(
 	primary key (memNo) 
 ) auto_increment = 1001;
 
+
+ALTER TABLE tbl_member
+RENAME COLUMN memRegData TO memRegDate;
+
 show tables;
 desc tbl_member;
 select *from tbl_member;
@@ -59,6 +63,16 @@ create table tbl_diary (
 	primary key(diaryNo)	
 )auto_increment = 10001;
 
+ALTER TABLE tbl_diary 
+DROP INDEX memId;
+
 show tables;
 desc tbl_diary;
 select *from tbl_diary;
+
+-- table join 
+select * from tbl_diary
+join tbl_member 
+on tbl_diary.memId = tbl_member.memId 
+where tbl_diary.memId = 'chanho';
+

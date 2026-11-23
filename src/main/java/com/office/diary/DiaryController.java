@@ -7,6 +7,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.List;
 
 
 @WebServlet("*.dir")
@@ -39,13 +40,33 @@ public class DiaryController extends HttpServlet {
 			diaryService = new DiaryService(new DiaryDao());
 			int resultForWrite = diaryService.writeNewDiary(request,response);
 			
+			if(resultForWrite > 0) {
+				
+				nextPage = generateView("write_ok");
+			}else {
+				nextPage = generateView("write_ng");
+				
+			}
 			
 			break;
 			
+		case "/diary_list.dir":
+			
+			diaryService = new DiaryService(new DiaryDao());
+			List<DiaryDto> myDiaries =	diaryService.getMyDiaries(request, response);
+			
+			nextPage = generateView("list");
+			
+			break;
+		
+		
+			
 		}
+	
 		
 		RequestDispatcher dispatcher = request.getRequestDispatcher(nextPage);
 		 dispatcher.forward(request, response);
+		 
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -54,6 +75,7 @@ public class DiaryController extends HttpServlet {
 	}
 	
 	private String generateView(String viewName) {
+		
 		return "view/diary/" + viewName + ".jsp";
 	}
 

@@ -8,7 +8,7 @@
 		<div class = "nav_wrap">
 			<a href = "${pageContext.request.contextPath}/">HOME</a>
 			<c:choose>
-				<c:when test="${empty sessionScope.signinedsMemberId}">
+				<c:when test="${empty sessionScope.signinedMemberId}">
 				<a href = "${pageContext.request.contextPath}/signup_form.mem">SIGN-UP</a>
 				<a href = "${pageContext.request.contextPath}/signin_form.mem">SIGN-IN</a>
 				</c:when>
