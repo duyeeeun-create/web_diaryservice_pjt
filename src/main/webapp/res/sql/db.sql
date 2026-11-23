@@ -71,8 +71,9 @@ desc tbl_diary;
 select *from tbl_diary;
 
 -- table join 
-select * from tbl_diary
-join tbl_member 
-on tbl_diary.memId = tbl_member.memId 
-where tbl_diary.memId = 'chanho';
+select * from tbl_diary td
+join tbl_member tm
+on td.memId = tm.memId
+where td.memId = 'gildong';
+
 

@@ -98,10 +98,10 @@ public class DiaryDao {
 			 conn = DriverManager.getConnection(URL, USERNAME, PASSWORD);
 			
 			//3. SQL 작성(작업지시서)
-			String sql = "sselect * from tbl_diary td"
-						+ "join tbl_member tm"
-						+"on td.memId = tm.memId"
-						+"where td.memId = ?";
+			String sql =  "select * from tbl_diary td "
+						+ "join tbl_member tm "
+						+ "on td.memId = tm.memId "
+						+ "where td.memId = ?";
 			//? 스테이트? -> memId-> 5번에서 값을 넣어준다
 			
 			//4. 일꾼 선택 (생성)
@@ -132,7 +132,7 @@ public class DiaryDao {
 				String memMail = rs.getString("memMail");
 				String memPhone = rs.getString("memPhone");
 				String memRegDate =	rs.getString("memRegDate");
-				String memModeDate =	rs.getString("memModeDate");
+				String memModDate = rs.getString("memModDate");
 				
 				DiaryDto diaryDto = new DiaryDto();
 				

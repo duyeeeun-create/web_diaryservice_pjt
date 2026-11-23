@@ -32,9 +32,9 @@ public class DiaryService {
 
 		public List<DiaryDto> getMyDiaries(HttpServletRequest request, HttpServletResponse response) {
 			
-			String signInedMemberId =	String.valueOf(request.getSession().getAttribute("signinedMemberId"));
+			String signinedMemberId =	String.valueOf(request.getSession().getAttribute("signinedMemberId"));
 			
-			List<DiaryDto> myDiaries = diaryDao.selectDiariesByMemId(signInedMemberId);
+			List<DiaryDto> myDiaries = diaryDao.selectDiariesByMemId(signinedMemberId);
 			
 			request.setAttribute("myDiaries", myDiaries);
 			

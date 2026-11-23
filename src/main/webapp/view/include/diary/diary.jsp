@@ -5,7 +5,7 @@
 		console.log("writeForm()");
 		
 		let form = document.write_form;
-		if(from.diaryWord.value === ''){
+		if(form.diaryWord.value === ''){
 			
 			alert("Please Input Diary");
 			form.diaryWord.focus();
